@@ -3,9 +3,40 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CYBER_DEV // Будущее веб-разработки</title>
-    <meta name="description" content="CYBER_DEV — студия создания футуристичных веб-интерфейсов и сайтов нового поколения." />
+    <title>CYBER_DEV // Главная</title>
+    <meta name="description" content="CYBER_DEV — создание уникальных цифровых миров и футуристичных веб-интерфейсов." />
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.05, 0.9, 0.1, 1.05), transform 0.8s cubic-bezier(0.05, 0.9, 0.1, 1.05);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Кнопка переключения языка */
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--ice-light);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+        .lang-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+    </style>
 </head>
 <body class="cyber-body">
     <header class="site-header">
@@ -15,55 +46,60 @@
                 <strong>CYBER_DEV</strong>
             </a>
             <nav class="header-nav">
-                <a href="index.html" class="active">Главная</a>
-                <a href="about.html">О нас</a>
-                <a href="#order-section">Заказать проект</a>
+                <a href="index.html" class="active" data-lang="nav-main">Главная</a>
+                <a href="about.html" data-lang="nav-about">О нас</a>
+                <a href="#order-section" data-lang="nav-order">Заказать проект</a>
+                <!-- Кнопка переключения языка -->
+                <button id="lang-switcher" class="lang-btn" onclick="toggleLanguage()">RU</button>
             </nav>
         </div>
     </header>
 
     <main class="wrap hero-section">
-        <section class="hero">
-            <!-- Возвращена та самая красивая неоновая/глитч надпись при входе -->
-            <h1 class="hero-title glitch" data-text="CYBER_DEV STUDIO">CYBER_DEV STUDIO</h1>
-            <p class="hero-subtitle">
+        <section class="hero fade-in-up">
+            <h1 class="hero-title glitch" data-text="CYBER_DEV STUDIO" data-lang="main-title">CYBER_DEV STUDIO</h1>
+            <p class="hero-subtitle" data-lang="main-subtitle">
                 Мы создаем уникальные цифровые миры, футуристичные веб-интерфейсы и сайты с вайбом киберпанка, которые опережают время.
             </p>
-            <a href="#order-section" class="btn-neon">Обсудить проект</a>
+            <div style="margin-top: 30px;">
+                <a href="#order-section" class="telegram-btn" style="display: inline-flex; text-decoration: none;" data-lang="main-btn">Обсудить проект</a>
+            </div>
         </section>
 
-        <!-- Цели и миссия проекта -->
-        <section class="services-grid">
-            <div class="service-card">
-                <div class="card-icon">⚡</div>
-                <h3>Скорость и код</h3>
-                <p>Используем чистый, оптимизированный стек технологий без лишнего мусора для максимальной производительности сайтов.</p>
-            </div>
-            <div class="service-card">
-                <div class="card-icon">💎</div>
-                <h3>Эстетика киберпанка</h3>
-                <p>Глубокие темные тона, неоновые акценты, эффект жидкого стекла и уникальный дизайн под каждый проект.</p>
-            </div>
-            <div class="service-card">
-                <div class="card-icon">🎯</div>
-                <h3>Цели проекта</h3>
-                <p>Превращать стандартные представления о веб-дизайне в интерактивные цифровые пространства, привлекающие внимание.</p>
+        <!-- Секция преимуществ -->
+        <section style="padding: 20px 0;">
+            <div class="why-us-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 40px 0;">
+                <div class="why-card fade-in-up" style="background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px; transition: 0.4s;">
+                    <div class="card-icon">⚡</div>
+                    <h4 style="color: var(--ice-light); margin-bottom: 10px;" data-lang="index-card-1-title">Скорость и код</h4>
+                    <p style="color: #94a3b8;" data-lang="index-card-1-text">Используем чистый, оптимизированный стек технологий без лишнего мусора для максимальной производительности сайтов.</p>
+                </div>
+                <div class="why-card fade-in-up" style="background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px; transition: 0.4s;">
+                    <div class="card-icon">💎</div>
+                    <h4 style="color: var(--ice-light); margin-bottom: 10px;" data-lang="index-card-2-title">Эстетика киберпанка</h4>
+                    <p style="color: #94a3b8;" data-lang="index-card-2-text">Глубокие темные тона, неоновые акценты, эффект жидкого стекла и уникальный дизайн под каждый проект.</p>
+                </div>
+                <div class="why-card fade-in-up" style="background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px; transition: 0.4s;">
+                    <div class="card-icon">🎯</div>
+                    <h4 style="color: var(--ice-light); margin-bottom: 10px;" data-lang="index-card-3-title">Цели проекта</h4>
+                    <p style="color: #94a3b8;" data-lang="index-card-3-text">Превращать стандартные представления о веб-дизайне в интерактивные цифровые пространства, привлекающие внимание.</p>
+                </div>
             </div>
         </section>
 
         <!-- Секция заказа проекта -->
-        <section id="order-section" class="order-container">
+        <section id="order-section" class="order-container fade-in-up">
             <div class="order-card cyber-glass">
                 <div class="profile-avatar-wrap">
                     <img src="images/3001849068.jpg" alt="Захар Прудников" class="profile-avatar">
                     <div class="neon-glow-ring"></div>
                 </div>
                 <div class="order-info">
-                    <h2>Связь с разработчиком</h2>
-                    <p>Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!</p>
+                    <h2 data-lang="order-title">Связь с разработчиком</h2>
+                    <p data-lang="order-text">Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!</p>
                     <a href="https://t.me/iusearchbtwe" target="_blank" class="telegram-btn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.195 1.006.13.821 1.054z"/></svg>
-                        Написать в Telegram (@iusearchbtwe)
+                        <span data-lang="order-btn">Написать в Telegram (@iusearchbtwe)</span>
                     </a>
                 </div>
             </div>
@@ -75,6 +111,73 @@
     </footer>
 
     <script>
+        // Словарь переводов для главной страницы
+        const translations = {
+            ru: {
+                "nav-main": "Главная",
+                "nav-about": "О нас",
+                "nav-order": "Заказать проект",
+                "main-title": "CYBER_DEV STUDIO",
+                "main-subtitle": "Мы создаем уникальные цифровые миры, футуристичные веб-интерфейсы и сайты с вайбом киберпанка, которые опережают время.",
+                "main-btn": "Обсудить проект",
+                "index-card-1-title": "Скорость и код",
+                "index-card-1-text": "Используем чистый, оптимизированный стек технологий без лишнего мусора для максимальной производительности сайтов.",
+                "index-card-2-title": "Эстетика киберпанка",
+                "index-card-2-text": "Глубокие темные тона, неоновые акценты, эффект жидкого стекла и уникальный дизайн под каждый проект.",
+                "index-card-3-title": "Цели проекта",
+                "index-card-3-text": "Превращать стандартные представления о веб-дизайне в интерактивные цифровые пространства, привлекающие внимание.",
+                "order-title": "Связь с разработчиком",
+                "order-text": "Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!",
+                "order-btn": "Написать в Telegram (@iusearchbtwe)"
+            },
+            en: {
+                "nav-main": "Home",
+                "nav-about": "About Us",
+                "nav-order": "Order Project",
+                "main-title": "CYBER_DEV STUDIO",
+                "main-subtitle": "We create unique digital worlds, futuristic web interfaces, and cyberpunk-vibe websites that are ahead of their time.",
+                "main-btn": "Discuss Project",
+                "index-card-1-title": "Speed & Code",
+                "index-card-1-text": "We use a clean, optimized technology stack without unnecessary bloat for maximum website performance.",
+                "index-card-2-title": "Cyberpunk Aesthetics",
+                "index-card-2-text": "Deep dark tones, neon accents, liquid glass effect, and unique design tailored to each project.",
+                "index-card-3-title": "Project Goals",
+                "index-card-3-text": "Transforming standard views on web design into interactive digital spaces that capture attention.",
+                "order-title": "Contact Developer",
+                "order-text": "Want to order a modern cyber-landing page or discuss a project? Write to me on Telegram—let's discuss the details!",
+                "order-btn": "Contact on Telegram (@iusearchbtwe)"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site-lang') || 'ru';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site-lang', lang);
+            
+            const switcher = document.getElementById('lang-switcher');
+            if (switcher) {
+                switcher.textContent = lang.toUpperCase();
+            }
+
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'ru' ? 'en' : 'ru';
+            applyLanguage(newLang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage(currentLang);
+        });
+
+        // Плавный скролл для якорей
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
@@ -91,6 +194,26 @@
                     }
                 }
             });
+        });
+
+        // Скрипт для всплывания элементов при прокрутке
+        const bodyContainer = document.querySelector('body.cyber-body');
+        const observerOptions = {
+            root: bodyContainer,
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
