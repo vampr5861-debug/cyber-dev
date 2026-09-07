@@ -6,6 +6,51 @@
     <title>CYBER_DEV // О нашей команде</title>
     <meta name="description" content="Познакомьтесь с командой CYBER_DEV, создающей веб-будущее." />
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        /* Анимация появления элементов при прокрутке */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.05, 0.9, 0.1, 1.05), transform 0.8s cubic-bezier(0.05, 0.9, 0.1, 1.05);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Дополнительные стили для блока "Почему мы?" */
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        .why-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.4s ease;
+        }
+        .why-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(125, 211, 252, 0.4);
+            box-shadow: 0 12px 35px rgba(2, 132, 199, 0.2), var(--ice-glow);
+        }
+        .why-card h4 {
+            color: var(--ice-light);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .why-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+    </style>
 </head>
 <body class="cyber-body">
     <header class="site-header">
@@ -17,29 +62,52 @@
             <nav class="header-nav">
                 <a href="index.html">Главная</a>
                 <a href="about.html" class="active">О нас</a>
-                <a href="index.html#order-section">Заказать проект</a>
+                <a href="#order-section">Заказать проект</a>
             </nav>
         </div>
     </header>
 
     <main class="wrap hero-section">
-        <section class="hero">
+        <section class="hero fade-in-up">
             <h1 class="hero-title glitch" data-text="О нашей команде">О нашей команде</h1>
             <p class="hero-subtitle">
-                Встречайте разработчика, который стоит за кодом и дизайном CYBER_DEV. Мы превращаем ваши идеи в футуристичные веб-реальности.
+                За каждым строком кода и неоновым интерфейсом CYBER_DEV стоит строгий подход к качеству и вниманию к деталям. Мы создаем сайты, которые выделяют вас из толпы.
             </p>
         </section>
 
-        <!-- Блок карточки команды -->
-        <section class="services-grid" style="justify-content: center; display: flex; padding-bottom: 20px;">
+        {/* Секция "Почему мы?" с красивыми всплывающими карточками */}
+        <section style="padding: 20px 0;">
+            <h2 style="text-align: center; color: var(--text-main); margin-bottom: 30px; font-size: 2rem; text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);" class="fade-in-up">Почему выбирают нас?</h2>
+            
+            <div class="why-us-grid">
+                <div class="why-card fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="card-icon">🚀</div>
+                    <h4>Эксклюзивный дизайн</h4>
+                    <p>Никаких шаблонных движков. Только чистый стиль жидкого стекла, глубокий киберпанк и современные интерактивные фичи.</p>
+                </div>
+                <div class="why-card fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="card-icon">🛡️</div>
+                    <h4>Надежность и скорость</h4>
+                    <p>Оптимизированный код работает молниеносно на любых устройствах — от мощных ПК до мобильных телефонов.</p>
+                </div>
+                <div class="why-card fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="card-icon">🤝</div>
+                    <h4>Прямая связь</h4>
+                    <p>Работа напрямую с разработчиком без посредников и менеджеров. Оперативные правки и полное погружение в ваш проект.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок разработчика -->
+        <section class="services-grid fade-in-up" style="justify-content: center; display: flex; padding-bottom: 20px;">
             <div class="service-card" style="text-align: center; max-width: 450px;">
                 <h3 style="color: var(--ice-light); margin-bottom: 10px;">Ядро разработки</h3>
                 <p>Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.</p>
             </div>
         </section>
 
-        <!-- Секция заказа проекта с твоим актуальным фото и правильным Telegram -->
-        <section id="order-section" class="order-container">
+        <!-- Секция заказа проекта -->
+        <section id="order-section" class="order-container fade-in-up">
             <div class="order-card cyber-glass">
                 <div class="profile-avatar-wrap">
                     <img src="images/3001849068.jpg" alt="Захар Прудников" class="profile-avatar">
@@ -60,5 +128,46 @@
     <footer class="site-footer">
         <div class="wrap">&copy; 2026 CYBER_DEV STUDIO. Мыслим в стиле неон.</div>
     </footer>
+
+    <script>
+        // Плавный скролл для якорей
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#') && targetId.length > 1) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const bodyContainer = document.querySelector('body.cyber-body');
+                        const targetPosition = targetElement.offsetTop - 20;
+                        bodyContainer.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Скрипт для всплывания элементов при прокрутке внутри кастомного body
+        const bodyContainer = document.querySelector('body.cyber-body');
+        const observerOptions = {
+            root: bodyContainer,
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
