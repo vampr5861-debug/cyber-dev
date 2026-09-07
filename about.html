@@ -277,6 +277,9 @@
             applyLanguage(newLang);
         }
 
+        // Применяем язык немедленно до отрисовки страницы
+        applyLanguage(currentLang);
+
         // Логика определения геолокации и источника перехода
         window.addEventListener('DOMContentLoaded', async () => {
             applyLanguage(currentLang);
