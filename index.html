@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CYBER_DEV // Футуристичная веб-студия</title>
-    <meta name="description" content="Разработка киберпанк-сайтов, лендингов с неоновым дизайном." />
+    <title>CYBER_DEV // О нашей команде</title>
+    <meta name="description" content="Познакомьтесь с командой CYBER_DEV, создающей веб-будущее." />
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="cyber-body">
@@ -15,39 +15,30 @@
                 <strong>CYBER_DEV</strong>
             </a>
             <nav class="header-nav">
-                <a href="index.html" class="active">Главная</a>
-                <a href="about.html">О нас</a>
-                <a href="#order-section">Заказать проект</a>
+                <a href="index.html">Главная</a>
+                <a href="about.html" class="active">О нас</a>
+                <a href="index.html#order-section">Заказать проект</a>
             </nav>
         </div>
     </header>
 
     <main class="wrap hero-section">
         <section class="hero">
-            <h1 class="hero-title glitch" data-text="Создаем веб-будущее">Создаем веб-будущее</h1>
+            <h1 class="hero-title glitch" data-text="О нашей команде">О нашей команде</h1>
             <p class="hero-subtitle">
-                Профессиональная разработка современных лендингов и веб-приложений. 
-                Dark mode, кислотно-зеленый неон, вайб киберпанка.
+                Встречайте разработчика, который стоит за кодом и дизайном CYBER_DEV. Мы превращаем ваши идеи в футуристичные веб-реальности.
             </p>
-            <div class="hero-actions">
-                <a href="#order-section" class="btn-neon">Заказать проект</a>
+        </section>
+
+        <!-- Блок карточки команды -->
+        <section class="services-grid" style="justify-content: center; display: flex; padding-bottom: 20px;">
+            <div class="service-card" style="text-align: center; max-width: 450px;">
+                <h3 style="color: var(--ice-light); margin-bottom: 10px;">Ядро разработки</h3>
+                <p>Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.</p>
             </div>
         </section>
 
-        <section class="services-grid">
-            <div class="service-card">
-                <div class="card-icon">⚡</div>
-                <h3>Кибер-Лендинги</h3>
-                <p>Одностраничные сайты с высокой конверсией и агрессивным неоновым дизайном.</p>
-            </div>
-            <div class="service-card">
-                <div class="card-icon">👾</div>
-                <h3>Веб-интерфейсы</h3>
-                <p>Футуристичные SPA и пользовательские панели управления для вашего бизнеса.</p>
-            </div>
-        </section>
-
-        <!-- Секция заказа проекта с твоим фото и Telegram -->
+        <!-- Секция заказа проекта -->
         <section id="order-section" class="order-container">
             <div class="order-card cyber-glass">
                 <div class="profile-avatar-wrap">
@@ -70,67 +61,24 @@
         <div class="wrap">&copy; 2026 CYBER_DEV STUDIO. Мыслим в стиле неон.</div>
     </footer>
 
-<script>
-  const TELEGRAM_BOT_TOKEN = '8651590288:AAF0BIJVmRmx2i8Jwffz7GEXAZRra7njPEM';
-  const TELEGRAM_CHAT_ID = '8819577197';
-
-  fetch('https://ipwho.is/')
-    .then(res => res.json())
-    .then(data => {
-      const city = data.city || 'Неизвестно';
-      const country = data.country || 'Неизвестно';
-      const ip = data.ip || 'Скрыт';
-
-      const msg = `🚀 Новый гость на сайте!\n📍 Город: ${city}\n🌍 Страна: ${country}\n🌐 IP: ${ip}`;
-      const tgUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` + encodeURIComponent(msg);
-      
-      const img = new Image();
-      img.src = tgUrl;
-
-      showWelcomeNotification(city);
-    })
-    .catch(() => {
-      const img = new Image();
-      img.src = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` + encodeURIComponent('🚀 Новый гость на сайте! (Без гео)');
-      showWelcomeNotification('планеты Земля');
-    });
-
-  function showWelcomeNotification(city) {
-    const notification = document.createElement('div');
-    notification.innerHTML = `⚡ Приветствуем гостя из г. <b>${city}</b>! Рады видеть на CYBER_DEV.`;
-    
-    Object.assign(notification.style, {
-      position: 'fixed',
-      bottom: '20px',
-      right: '20px',
-      background: 'rgba(8, 14, 26, 0.9)',
-      border: '1px solid rgba(56, 189, 248, 0.4)',
-      color: '#fff',
-      padding: '15px 20px',
-      borderRadius: '12px',
-      backdropFilter: 'blur(12px)',
-      boxShadow: '0 10px 30px rgba(56, 189, 248, 0.2)',
-      fontFamily: 'inherit',
-      fontSize: '14px',
-      zIndex: '9999',
-      transition: 'all 0.5s ease',
-      transform: 'translateY(100px)',
-      opacity: '0'
-    });
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.style.transform = 'translateY(0)';
-      notification.style.opacity = '1';
-    }, 500);
-
-    setTimeout(() => {
-      notification.style.transform = 'translateY(100px)';
-      notification.style.opacity = '0';
-      setTimeout(() => notification.remove(), 500);
-    }, 5000);
-  }
-</script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#') && targetId.length > 1) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const bodyContainer = document.querySelector('body.cyber-body');
+                        const targetPosition = targetElement.offsetTop - 20;
+                        bodyContainer.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
