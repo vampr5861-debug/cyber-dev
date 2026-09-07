@@ -7,7 +7,6 @@
     <meta name="description" content="Познакомьтесь с командой CYBER_DEV, создающей веб-будущее." />
     <link rel="stylesheet" href="css/styles.css" />
     <style>
-        /* Анимация появления элементов при прокрутке */
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -18,7 +17,6 @@
             transform: translateY(0);
         }
 
-        /* Дополнительные стили для блока "Почему мы?" */
         .why-us-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -50,9 +48,64 @@
             color: #94a3b8;
             font-size: 0.95rem;
         }
+
+        /* Стиль для всплывающего киберпанк-уведомления */
+        #cyber-welcome-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-left: 4px solid var(--ice-light, #38bdf8);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: #f8fafc;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.2);
+            font-family: inherit;
+            max-width: 320px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #cyber-welcome-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #38bdf8;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toast-header::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #38bdf8;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #38bdf8;
+        }
+        .toast-body {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
     </style>
 </head>
 <body class="cyber-body">
+    <!-- Всплывающее уведомление об источнике входа -->
+    <div id="cyber-welcome-toast">
+        <div class="toast-header">System // Connection</div>
+        <div class="toast-body" id="toast-message-text">Определяем источник подключения...</div>
+    </div>
+
     <header class="site-header">
         <div class="wrap header-inner">
             <a class="brand" href="index.html">
@@ -75,7 +128,7 @@
             </p>
         </section>
 
-        <!-- Секция "Почему мы?" с красивыми всплывающими карточками -->
+        <!-- Секция "Почему мы?" -->
         <section style="padding: 20px 0;">
             <h2 style="text-align: center; color: var(--text-main); margin-bottom: 30px; font-size: 2rem; text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);" class="fade-in-up">Почему выбирают нас?</h2>
             
@@ -130,6 +183,50 @@
     </footer>
 
     <script>
+        // Логика определения источника перехода (реферера)
+        window.addEventListener('DOMContentLoaded', () => {
+            const toast = document.getElementById('cyber-welcome-toast');
+            const msgText = document.getElementById('toast-message-text');
+            
+            let sourceOrigin = document.referrer;
+            let message = "Добро пожаловать, странник! Прямой доступ к сети.";
+
+            if (sourceOrigin) {
+                try {
+                    let urlObj = new URL(sourceOrigin);
+                    let hostname = urlObj.hostname;
+                    
+                    if (hostname.includes('google')) {
+                        message = "Обнаружен вход через поисковую сеть Google.";
+                    } else if (hostname.includes('yandex')) {
+                        message = "Обнаружен вход через поисковую сеть Yandex.";
+                    } else if (hostname.includes('t.me') || hostname.includes('telegram')) {
+                        message = "Добро пожаловать из Telegram-канала/чата!";
+                    } else if (hostname.includes('vk.com')) {
+                        message = "Добро пожаловать из социальной сети VK!";
+                    } else if (hostname !== window.location.hostname) {
+                        message = `Приветствуем гостя с внешнего узла: ${hostname}`;
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            } else {
+                message = "Чистый запуск узла. Добро пожаловать в систему!";
+            }
+
+            msgText.textContent = message;
+
+            // Плавное появление тостера через 0.8 секунд после загрузки
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 800);
+
+            // Автоматическое скрытие через 5 секунд
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5800);
+        });
+
         // Плавный скролл для якорей
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
