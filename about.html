@@ -103,7 +103,7 @@
     <!-- Всплывающее уведомление об источнике входа -->
     <div id="cyber-welcome-toast">
         <div class="toast-header">System // Connection</div>
-        <div class="toast-body" id="toast-message-text">Определяем источник подключения...</div>
+        <div class="toast-body" id="toast-message-text">Определяем местоположение узла...</div>
     </div>
 
     <header class="site-header">
@@ -124,7 +124,7 @@
         <section class="hero fade-in-up">
             <h1 class="hero-title glitch" data-text="О нашей команде">О нашей команде</h1>
             <p class="hero-subtitle">
-                За каждым строком кода и неоновым интерфейсом CYBER_DEV стоит строгий подход к качеству и вниманию к деталям. Мы создаем сайты, которые выделяют вас из толпы.
+                За каждой строкой кода и неоновым интерфейсом CYBER_DEV стоит строгий подход к качеству и вниманию к деталям. Мы создаем сайты, которые выделяют вас из толпы.
             </p>
         </section>
 
@@ -183,35 +183,53 @@
     </footer>
 
     <script>
-        // Логика определения источника перехода (реферера)
-        window.addEventListener('DOMContentLoaded', () => {
+        // Логика определения геолокации и источника перехода
+        window.addEventListener('DOMContentLoaded', async () => {
             const toast = document.getElementById('cyber-welcome-toast');
             const msgText = document.getElementById('toast-message-text');
             
-            let sourceOrigin = document.referrer;
             let message = "Добро пожаловать, странник! Прямой доступ к сети.";
+            let locationDetected = false;
 
-            if (sourceOrigin) {
-                try {
-                    let urlObj = new URL(sourceOrigin);
-                    let hostname = urlObj.hostname;
-                    
-                    if (hostname.includes('google')) {
-                        message = "Обнаружен вход через поисковую сеть Google.";
-                    } else if (hostname.includes('yandex')) {
-                        message = "Обнаружен вход через поисковую сеть Yandex.";
-                    } else if (hostname.includes('t.me') || hostname.includes('telegram')) {
-                        message = "Добро пожаловать из Telegram-канала/чата!";
-                    } else if (hostname.includes('vk.com')) {
-                        message = "Добро пожаловать из социальной сети VK!";
-                    } else if (hostname !== window.location.hostname) {
-                        message = `Приветствуем гостя с внешнего узла: ${hostname}`;
+            // Пытаемся определить город по IP
+            try {
+                let response = await fetch('https://ipapi.co/json/');
+                if (response.ok) {
+                    let data = await response.json();
+                    if (data && data.city) {
+                        message = `Привет, странник из ${data.city}!`;
+                        locationDetected = true;
                     }
-                } catch (e) {
-                    console.error(e);
                 }
-            } else {
-                message = "Чистый запуск узла. Добро пожаловать в систему!";
+            } catch (e) {
+                console.error("Геолокация недоступна:", e);
+            }
+
+            // Если город определить не удалось, проверяем реферер
+            if (!locationDetected) {
+                let sourceOrigin = document.referrer;
+                if (sourceOrigin) {
+                    try {
+                        let urlObj = new URL(sourceOrigin);
+                        let hostname = urlObj.hostname;
+                        
+                        if (hostname.includes('google')) {
+                            message = "Обнаружен вход через поисковую сеть Google.";
+                        } else if (hostname.includes('yandex')) {
+                            message = "Обнаружен вход через поисковую сеть Yandex.";
+                        } else if (hostname.includes('t.me') || hostname.includes('telegram')) {
+                            message = "Добро пожаловать из Telegram-канала/чата!";
+                        } else if (hostname.includes('vk.com')) {
+                            message = "Добро пожаловать из социальной сети VK!";
+                        } else if (hostname !== window.location.hostname) {
+                            message = `Приветствуем гостя с внешнего узла: ${hostname}`;
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    }
+                } else {
+                    message = "Чистый запуск узла. Добро пожаловать в систему!";
+                }
             }
 
             msgText.textContent = message;
