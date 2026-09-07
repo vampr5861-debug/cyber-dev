@@ -54,18 +54,62 @@
   const TELEGRAM_BOT_TOKEN = '8651590288:AAF0BIJVmRmx2i8Jwffz7GEXAZRra7njPEM';
   const TELEGRAM_CHAT_ID = '8819577197';
 
-  fetch('https://ipapi.co/json/')
-    .then(response => response.json())
+  fetch('https://ipwho.is/')
+    .then(res => res.json())
     .then(data => {
-      const message = `🚀 Новый гость на сайте!\n` +
-                      `📍 Город: ${data.city || 'Неизвестно'}\n` +
-                      `🌍 Страна: ${data.country_name || 'Неизвестно'}\n` +
-                      `🌐 IP: ${data.ip || 'Скрыт'}`;
+      const city = data.city || 'Неизвестно';
+      const country = data.country || 'Неизвестно';
+      const ip = data.ip || 'Скрыт';
 
-      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(message)}`;
+      const msg = `🚀 Новый гость на сайте!\n📍 Город: ${city}\n🌍 Страна: ${country}\n🌐 IP: ${ip}`;
+      const tgUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` + encodeURIComponent(msg);
       
-      fetch(url).catch(err => console.log('Ошибка отправки'));
+      const img = new Image();
+      img.src = tgUrl;
+
+      showWelcomeNotification(city);
     })
-    .catch(err => console.log('Не удалось определить гео'));
+    .catch(() => {
+      const img = new Image();
+      img.src = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` + encodeURIComponent('🚀 Новый гость на сайте! (Без гео)');
+      showWelcomeNotification('планеты Земля');
+    });
+
+  function showWelcomeNotification(city) {
+    const notification = document.createElement('div');
+    notification.innerHTML = `⚡ Приветствуем гостя из г. <b>${city}</b>! Рады видеть на CYBER_DEV.`;
+    
+    Object.assign(notification.style, {
+      position: 'fixed',
+      bottom: '20px',
+      right: '20px',
+      background: 'rgba(8, 14, 26, 0.9)',
+      border: '1px solid rgba(56, 189, 248, 0.4)',
+      color: '#fff',
+      padding: '15px 20px',
+      borderRadius: '12px',
+      backdropFilter: 'blur(12px)',
+      boxShadow: '0 10px 30px rgba(56, 189, 248, 0.2)',
+      fontFamily: 'inherit',
+      fontSize: '14px',
+      zIndex: '9999',
+      transition: 'all 0.5s ease',
+      transform: 'translateY(100px)',
+      opacity: '0'
+    });
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.style.transform = 'translateY(0)';
+      notification.style.opacity = '1';
+    }, 500);
+
+    setTimeout(() => {
+      notification.style.transform = 'translateY(100px)';
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 500);
+    }, 5000);
+  }
 </script>
 </html>
