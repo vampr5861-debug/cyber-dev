@@ -330,14 +330,77 @@ body.cyber-body {
     box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4), var(--ice-glow);
 }
 
+/* ==========================================
+   Адаптивность для мобильных устройств
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .wrap {
+        padding: 0 20px;
+    }
+}
+
 @media (max-width: 768px) {
-    .order-card {
+    .header-inner {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+    }
+    
+    .header-nav {
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+
+    .hero-title {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .why-us-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+        margin: 30px 0;
+    }
+
+    .why-card {
+        padding: 20px;
+    }
+
+    .order-card,
+    .order-card.cyber-glass {
         flex-direction: column;
         text-align: center;
-        padding: 30px 20px;
+        padding: 25px 20px;
     }
+
+    .profile-avatar-wrap {
+        margin: 0 auto 15px auto;
+    }
+
     .telegram-btn {
         justify-content: center;
         width: 100%;
+    }
+
+    #cyber-welcome-toast {
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .site-header .brand strong {
+        font-size: 1.1rem;
     }
 }
