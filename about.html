@@ -21,7 +21,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin: 50px 0;
+            margin: 40px 0;
         }
         .why-card {
             background: var(--glass-bg);
@@ -36,7 +36,7 @@
         }
         .why-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(125, 211, 252, 0.4);
+            border-color: rgba(56, 189, 248, 0.4);
             box-shadow: 0 12px 35px rgba(2, 132, 199, 0.2), var(--ice-glow);
         }
         .why-card h4 {
@@ -47,6 +47,86 @@
         .why-card p {
             color: #94a3b8;
             font-size: 0.95rem;
+        }
+
+        /* Стили для слайдера / карусели */
+        .slider-container {
+            position: relative;
+            max-width: 850px;
+            margin: 50px auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            animation: fadeInSlide 0.6s ease forwards;
+        }
+        .slide.active-slide {
+            display: block;
+        }
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .slide-content h3 {
+            color: var(--ice-light);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slide-content p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+        .slider-btn {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--ice-light);
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .slider-btn:hover {
+            background: rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+        .slider-dots {
+            display: flex;
+            gap: 8px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dot.active-dot {
+            background: var(--ice-light);
+            box-shadow: 0 0 10px var(--ice-light);
+            width: 25px;
+            border-radius: 6px;
         }
 
         /* Кнопка переключения языка */
@@ -69,7 +149,7 @@
             box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
         }
 
-        /* Стиль для всплывающего киберпанк-уведомления */
+        /* Всплывающее уведомление */
         #cyber-welcome-toast {
             position: fixed;
             bottom: 30px;
@@ -120,7 +200,6 @@
     </style>
 </head>
 <body class="cyber-body">
-    <!-- Всплывающее уведомление об источнике входа -->
     <div id="cyber-welcome-toast">
         <div class="toast-header">System // Connection</div>
         <div class="toast-body" id="toast-message-text">Определяем местоположение узла...</div>
@@ -136,7 +215,6 @@
                 <a href="index.html" data-lang="nav-main">Главная</a>
                 <a href="about.html" class="active" data-lang="nav-about">О нас</a>
                 <a href="#order-section" data-lang="nav-order">Заказать проект</a>
-                <!-- Кнопка переключения языка -->
                 <button id="lang-switcher" class="lang-btn" onclick="toggleLanguage()">RU</button>
             </nav>
         </div>
@@ -151,7 +229,7 @@
         </section>
 
         <!-- Секция "Почему мы?" -->
-        <section style="padding: 20px 0;">
+        <section style="padding: 10px 0;">
             <h2 style="text-align: center; color: var(--text-main); margin-bottom: 30px; font-size: 2rem; text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);" class="fade-in-up" data-lang="why-title">Почему выбирают нас?</h2>
             
             <div class="why-us-grid">
@@ -173,11 +251,43 @@
             </div>
         </section>
 
-        <!-- Блок разработчика -->
-        <section class="services-grid fade-in-up" style="justify-content: center; display: flex; padding-bottom: 20px;">
-            <div class="service-card" style="text-align: center; max-width: 450px;">
-                <h3 style="color: var(--ice-light); margin-bottom: 10px;" data-lang="core-title">Ядро разработки</h3>
-                <p data-lang="core-text">Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.</p>
+        <!-- Секция ИНТЕРАКТИВНЫХ СЛАЙДОВ (Карусель) -->
+        <section class="fade-in-up" style="padding: 20px 0;">
+            <h2 style="text-align: center; color: var(--text-main); margin-bottom: 20px; font-size: 1.8rem;" data-lang="slides-main-title">Архитектура & Стандарты</h2>
+            
+            <div class="slider-container">
+                <!-- Слайд 1 -->
+                <div class="slide active-slide" data-slide="0">
+                    <div class="slide-content">
+                        <h3 data-lang="slide-1-title">⚙️ 01 // Чистая архитектура кода</h3>
+                        <p data-lang="slide-1-text">Мы не используем тяжелые раздутые конструкторы сайтов. Каждый проект собирается на чистом, оптимизированном стеке с акцентом на производительность, высокую скорость загрузки и адаптивность под любые экраны.</p>
+                    </div>
+                </div>
+                <!-- Слайд 2 -->
+                <div class="slide" data-slide="1">
+                    <div class="slide-content">
+                        <h3 data-lang="slide-2-title">🌐 02 // Атмосферный UI / UX дизайн</h3>
+                        <p data-lang="slide-2-text">Интерфейсы разрабатываются с учетом современных трендов цифровой эстетики: полупрозрачные стеклянные панели (glassmorphism), строгая сетка и аккуратные микроанимации создают премиальный пользовательский опыт.</p>
+                    </div>
+                </div>
+                <!-- Слайд 3 -->
+                <div class="slide" data-slide="2">
+                    <div class="slide-content">
+                        <h3 data-lang="slide-3-title">🔒 03 // Прямой контроль и поддержка</h3>
+                        <p data-lang="slide-3-text">Никаких посредников, менеджеров среднего звена или затягивания сроков. Вы общаетесь напрямую с инженером-разработчиком, что гарантирует точное воплощение ваших идей в реальность.</p>
+                    </div>
+                </div>
+
+                <!-- Управление слайдером -->
+                <div class="slider-controls">
+                    <button class="slider-btn" onclick="changeSlide(-1)" data-lang="slide-prev">← Назад</button>
+                    <div class="slider-dots">
+                        <span class="dot active-dot" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                    </div>
+                    <button class="slider-btn" onclick="changeSlide(1)" data-lang="slide-next">Вперед →</button>
+                </div>
             </div>
         </section>
 
@@ -205,7 +315,7 @@
     </footer>
 
     <script>
-        // Словарь переводов
+        // Словарь переводов (включая новые слайды)
         const translations = {
             ru: {
                 "nav-main": "Главная",
@@ -220,8 +330,15 @@
                 "card-2-text": "Оптимизированный код работает молниеносно на любых устройствах — от мощных ПК до мобильных телефонов.",
                 "card-3-title": "Прямая связь",
                 "card-3-text": "Работа напрямую с разработчиком без посредников и менеджеров. Оперативные правки и полное погружение в ваш проект.",
-                "core-title": "Ядро разработки",
-                "core-text": "Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.",
+                "slides-main-title": "Архитектура & Стандарты",
+                "slide-1-title": "⚙️ 01 // Чистая архитектура кода",
+                "slide-1-text": "Мы не используем тяжелые раздутые конструкторы сайтов. Каждый проект собирается на чистом, оптимизированном стеке с акцентом на производительность, высокую скорость загрузки и адаптивность под любые экраны.",
+                "slide-2-title": "🌐 02 // Атмосферный UI / UX дизайн",
+                "slide-2-text": "Интерфейсы разрабатываются с учетом современных трендов цифровой эстетики: полупрозрачные стеклянные панели (glassmorphism), строгая сетка и аккуратные микроанимации создают премиальный пользовательский опыт.",
+                "slide-3-title": "🔒 03 // Прямой контроль и поддержка",
+                "slide-3-text": "Никаких посредников, менеджеров среднего звена или затягивания сроков. Вы общаетесь напрямую с инженером-разработчиком, что гарантирует точное воплощение ваших идей в реальность.",
+                "slide-prev": "← Назад",
+                "slide-next": "Вперед →",
                 "order-title": "Связь с разработчиком",
                 "order-text": "Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!",
                 "order-btn": "Написать в Telegram (@iusearchbtwe)"
@@ -239,8 +356,15 @@
                 "card-2-text": "Optimized code runs lightning-fast on all devices—from powerful PCs to mobile phones.",
                 "card-3-title": "Direct Communication",
                 "card-3-text": "Work directly with the developer without middlemen or managers. Quick edits and full immersion in your project.",
-                "core-title": "Development Core",
-                "core-text": "Creating unique digital worlds and web interfaces with a cyberpunk vibe.",
+                "slides-main-title": "Architecture & Standards",
+                "slide-1-title": "⚙️ 01 // Clean Code Architecture",
+                "slide-1-text": "We do not use heavy, bloated site builders. Each project is built on a clean, optimized stack focusing on performance, lightning-fast loading speeds, and adaptability across all screens.",
+                "slide-2-title": "🌐 02 // Atmospheric UI / UX Design",
+                "slide-2-text": "Interfaces are crafted keeping modern digital aesthetics in mind: translucent glass panels (glassmorphism), clean grids, and subtle micro-animations that deliver a premium user experience.",
+                "slide-3-title": "🔒 03 // Direct Control & Support",
+                "slide-3-text": "No middlemen, middle managers, or timeline delays. You communicate directly with the lead software engineer, ensuring your exact vision comes to life.",
+                "slide-prev": "← Prev",
+                "slide-next": "Next →",
                 "order-title": "Contact Developer",
                 "order-text": "Want to order a modern cyber-landing page or discuss a project? Write to me on Telegram—let's discuss the details!",
                 "order-btn": "Contact on Telegram (@iusearchbtwe)"
@@ -264,7 +388,6 @@
                     const newText = translations[lang][key];
                     el.textContent = newText;
                     
-                    // Синхронизируем атрибут data-text для глитч-эффекта
                     if (el.classList.contains('glitch')) {
                         el.setAttribute('data-text', newText);
                     }
@@ -277,10 +400,40 @@
             applyLanguage(newLang);
         }
 
-        // Применяем язык немедленно до отрисовки страницы
+        // Логика слайдера
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active-slide'));
+            dots.forEach(dot => dot.classList.remove('active-dot'));
+
+            slides[slideIndex].classList.add('active-slide');
+            dots[slideIndex].classList.add('active-dot');
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        // Автоматическое переключение слайдов каждые 6 секунд
+        setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 6000);
+
         applyLanguage(currentLang);
 
-        // Логика определения геолокации и источника перехода
         window.addEventListener('DOMContentLoaded', async () => {
             applyLanguage(currentLang);
 
@@ -340,7 +493,6 @@
             }, 5800);
         });
 
-        // Плавный скролл для якорей
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
@@ -359,7 +511,6 @@
             });
         });
 
-        // Скрипт для всплывания элементов при прокрутке внутри кастомного body
         const bodyContainer = document.querySelector('body.cyber-body');
         const observerOptions = {
             root: bodyContainer,
