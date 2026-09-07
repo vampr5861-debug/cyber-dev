@@ -17,6 +17,7 @@
             <nav class="header-nav">
                 <a href="index.html" class="active">Главная</a>
                 <a href="about.html">О нас</a>
+                <a href="#order-section">Заказать проект</a>
             </nav>
         </div>
     </header>
@@ -29,7 +30,7 @@
                 Dark mode, кислотно-зеленый неон, вайб киберпанка.
             </p>
             <div class="hero-actions">
-                <a href="about.html" class="btn-neon">Заказать проект</a>
+                <a href="#order-section" class="btn-neon">Заказать проект</a>
             </div>
         </section>
 
@@ -45,11 +46,30 @@
                 <p>Футуристичные SPA и пользовательские панели управления для вашего бизнеса.</p>
             </div>
         </section>
+
+        <!-- Секция заказа проекта с твоим фото и Telegram -->
+        <section id="order-section" class="order-container">
+            <div class="order-card cyber-glass">
+                <div class="profile-avatar-wrap">
+                    <img src="images/3001849068.jpg" alt="Захар Прудников" class="profile-avatar">
+                    <div class="neon-glow-ring"></div>
+                </div>
+                <div class="order-info">
+                    <h2>Связь с разработчиком</h2>
+                    <p>Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!</p>
+                    <a href="https://t.me/w1ntez1" target="_blank" class="telegram-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.195 1.006.13.821 1.054z"/></svg>
+                        Написать в Telegram (@w1ntez1)
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
         <div class="wrap">&copy; 2026 CYBER_DEV STUDIO. Мыслим в стиле неон.</div>
     </footer>
+
 <script>
   const TELEGRAM_BOT_TOKEN = '8651590288:AAF0BIJVmRmx2i8Jwffz7GEXAZRra7njPEM';
   const TELEGRAM_CHAT_ID = '8819577197';
