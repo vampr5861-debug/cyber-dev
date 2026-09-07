@@ -261,7 +261,13 @@
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.getAttribute('data-lang');
                 if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
+                    const newText = translations[lang][key];
+                    el.textContent = newText;
+                    
+                    // Синхронизируем атрибут data-text для глитч-эффекта
+                    if (el.classList.contains('glitch')) {
+                        el.setAttribute('data-text', newText);
+                    }
                 }
             });
         }
