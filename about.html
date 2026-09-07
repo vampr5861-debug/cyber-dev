@@ -49,6 +49,26 @@
             font-size: 0.95rem;
         }
 
+        /* Кнопка переключения языка */
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--ice-light);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+        .lang-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+
         /* Стиль для всплывающего киберпанк-уведомления */
         #cyber-welcome-toast {
             position: fixed;
@@ -113,40 +133,42 @@
                 <strong>CYBER_DEV</strong>
             </a>
             <nav class="header-nav">
-                <a href="index.html">Главная</a>
-                <a href="about.html" class="active">О нас</a>
-                <a href="#order-section">Заказать проект</a>
+                <a href="index.html" data-lang="nav-main">Главная</a>
+                <a href="about.html" class="active" data-lang="nav-about">О нас</a>
+                <a href="#order-section" data-lang="nav-order">Заказать проект</a>
+                <!-- Кнопка переключения языка -->
+                <button id="lang-switcher" class="lang-btn" onclick="toggleLanguage()">RU</button>
             </nav>
         </div>
     </header>
 
     <main class="wrap hero-section">
         <section class="hero fade-in-up">
-            <h1 class="hero-title glitch" data-text="О нашей команде">О нашей команде</h1>
-            <p class="hero-subtitle">
+            <h1 class="hero-title glitch" data-text="О нашей команде" data-lang="hero-title">О нашей команде</h1>
+            <p class="hero-subtitle" data-lang="hero-subtitle">
                 За каждой строкой кода и неоновым интерфейсом CYBER_DEV стоит строгий подход к качеству и вниманию к деталям. Мы создаем сайты, которые выделяют вас из толпы.
             </p>
         </section>
 
         <!-- Секция "Почему мы?" -->
         <section style="padding: 20px 0;">
-            <h2 style="text-align: center; color: var(--text-main); margin-bottom: 30px; font-size: 2rem; text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);" class="fade-in-up">Почему выбирают нас?</h2>
+            <h2 style="text-align: center; color: var(--text-main); margin-bottom: 30px; font-size: 2rem; text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);" class="fade-in-up" data-lang="why-title">Почему выбирают нас?</h2>
             
             <div class="why-us-grid">
                 <div class="why-card fade-in-up" style="transition-delay: 0.1s;">
                     <div class="card-icon">🚀</div>
-                    <h4>Эксклюзивный дизайн</h4>
-                    <p>Никаких шаблонных движков. Только чистый стиль жидкого стекла, глубокий киберпанк и современные интерактивные фичи.</p>
+                    <h4 data-lang="card-1-title">Эксклюзивный дизайн</h4>
+                    <p data-lang="card-1-text">Никаких шаблонных движков. Только чистый стиль жидкого стекла, глубокий киберпанк и современные интерактивные фичи.</p>
                 </div>
                 <div class="why-card fade-in-up" style="transition-delay: 0.2s;">
                     <div class="card-icon">🛡️</div>
-                    <h4>Надежность и скорость</h4>
-                    <p>Оптимизированный код работает молниеносно на любых устройствах — от мощных ПК до мобильных телефонов.</p>
+                    <h4 data-lang="card-2-title">Надежность и скорость</h4>
+                    <p data-lang="card-2-text">Оптимизированный код работает молниеносно на любых устройствах — от мощных ПК до мобильных телефонов.</p>
                 </div>
                 <div class="why-card fade-in-up" style="transition-delay: 0.3s;">
                     <div class="card-icon">🤝</div>
-                    <h4>Прямая связь</h4>
-                    <p>Работа напрямую с разработчиком без посредников и менеджеров. Оперативные правки и полное погружение в ваш проект.</p>
+                    <h4 data-lang="card-3-title">Прямая связь</h4>
+                    <p data-lang="card-3-text">Работа напрямую с разработчиком без посредников и менеджеров. Оперативные правки и полное погружение в ваш проект.</p>
                 </div>
             </div>
         </section>
@@ -154,8 +176,8 @@
         <!-- Блок разработчика -->
         <section class="services-grid fade-in-up" style="justify-content: center; display: flex; padding-bottom: 20px;">
             <div class="service-card" style="text-align: center; max-width: 450px;">
-                <h3 style="color: var(--ice-light); margin-bottom: 10px;">Ядро разработки</h3>
-                <p>Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.</p>
+                <h3 style="color: var(--ice-light); margin-bottom: 10px;" data-lang="core-title">Ядро разработки</h3>
+                <p data-lang="core-text">Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.</p>
             </div>
         </section>
 
@@ -167,11 +189,11 @@
                     <div class="neon-glow-ring"></div>
                 </div>
                 <div class="order-info">
-                    <h2>Связь с разработчиком</h2>
-                    <p>Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!</p>
+                    <h2 data-lang="order-title">Связь с разработчиком</h2>
+                    <p data-lang="order-text">Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!</p>
                     <a href="https://t.me/iusearchbtwe" target="_blank" class="telegram-btn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.195 1.006.13.821 1.054z"/></svg>
-                        Написать в Telegram (@iusearchbtwe)
+                        <span data-lang="order-btn">Написать в Telegram (@iusearchbtwe)</span>
                     </a>
                 </div>
             </div>
@@ -183,15 +205,82 @@
     </footer>
 
     <script>
+        // Словарь переводов
+        const translations = {
+            ru: {
+                "nav-main": "Главная",
+                "nav-about": "О нас",
+                "nav-order": "Заказать проект",
+                "hero-title": "О нашей команде",
+                "hero-subtitle": "За каждой строкой кода и неоновым интерфейсом CYBER_DEV стоит строгий подход к качеству и вниманию к деталям. Мы создаем сайты, которые выделяют вас из толпы.",
+                "why-title": "Почему выбирают нас?",
+                "card-1-title": "Эксклюзивный дизайн",
+                "card-1-text": "Никаких шаблонных движков. Только чистый стиль жидкого стекла, глубокий киберпанк и современные интерактивные фичи.",
+                "card-2-title": "Надежность и скорость",
+                "card-2-text": "Оптимизированный код работает молниеносно на любых устройствах — от мощных ПК до мобильных телефонов.",
+                "card-3-title": "Прямая связь",
+                "card-3-text": "Работа напрямую с разработчиком без посредников и менеджеров. Оперативные правки и полное погружение в ваш проект.",
+                "core-title": "Ядро разработки",
+                "core-text": "Создание уникальных цифровых миров и веб-интерфейсов с вайбом киберпанка.",
+                "order-title": "Связь с разработчиком",
+                "order-text": "Хотите заказать современный кибер-лендинг или обсудить проект? Напишите мне в Telegram — обсудим детали!",
+                "order-btn": "Написать в Telegram (@iusearchbtwe)"
+            },
+            en: {
+                "nav-main": "Home",
+                "nav-about": "About Us",
+                "nav-order": "Order Project",
+                "hero-title": "About Our Team",
+                "hero-subtitle": "Behind every line of code and neon interface of CYBER_DEV lies a strict approach to quality and attention to detail. We create websites that make you stand out from the crowd.",
+                "why-title": "Why Choose Us?",
+                "card-1-title": "Exclusive Design",
+                "card-1-text": "No template engines. Only pure liquid glass style, deep cyberpunk aesthetics, and modern interactive features.",
+                "card-2-title": "Reliability & Speed",
+                "card-2-text": "Optimized code runs lightning-fast on all devices—from powerful PCs to mobile phones.",
+                "card-3-title": "Direct Communication",
+                "card-3-text": "Work directly with the developer without middlemen or managers. Quick edits and full immersion in your project.",
+                "core-title": "Development Core",
+                "core-text": "Creating unique digital worlds and web interfaces with a cyberpunk vibe.",
+                "order-title": "Contact Developer",
+                "order-text": "Want to order a modern cyber-landing page or discuss a project? Write to me on Telegram—let's discuss the details!",
+                "order-btn": "Contact on Telegram (@iusearchbtwe)"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site-lang') || 'ru';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site-lang', lang);
+            
+            const switcher = document.getElementById('lang-switcher');
+            if (switcher) {
+                switcher.textContent = lang.toUpperCase();
+            }
+
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'ru' ? 'en' : 'ru';
+            applyLanguage(newLang);
+        }
+
         // Логика определения геолокации и источника перехода
         window.addEventListener('DOMContentLoaded', async () => {
+            applyLanguage(currentLang);
+
             const toast = document.getElementById('cyber-welcome-toast');
             const msgText = document.getElementById('toast-message-text');
             
             let message = "Добро пожаловать, странник! Прямой доступ к сети.";
             let locationDetected = false;
 
-            // Пытаемся определить город по IP
             try {
                 let response = await fetch('https://ipapi.co/json/');
                 if (response.ok) {
@@ -205,7 +294,6 @@
                 console.error("Геолокация недоступна:", e);
             }
 
-            // Если город определить не удалось, проверяем реферер
             if (!locationDetected) {
                 let sourceOrigin = document.referrer;
                 if (sourceOrigin) {
@@ -234,12 +322,10 @@
 
             msgText.textContent = message;
 
-            // Плавное появление тостера через 0.8 секунд после загрузки
             setTimeout(() => {
                 toast.classList.add('show');
             }, 800);
 
-            // Автоматическое скрытие через 5 секунд
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 5800);
